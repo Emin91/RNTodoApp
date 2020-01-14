@@ -4,7 +4,6 @@ import { Navbar } from './src/components/Navbar'
 import { HomeScreen } from './src/screens/HomeScreen'
 import { TodoScreen } from './src/screens/TodoScreen'
 
-
 export default function App() {
   const [todoId, setTodoId] = useState(null)
   const [todos, setTodos] = useState([

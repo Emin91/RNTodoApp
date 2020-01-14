@@ -1,26 +1,27 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { View, TextInput, Button, } from 'react-native'
 import styles from '../styles/AddTodoStyle'
 import { THEME } from '../theme'
+import Feather from 'react-native-vector-icons/Feather'
 
 
 export const AddTodo = ({ onSubmit }) => {
     const [value, setValue] = useState('')
 
     const pressHandler = () => {
-        console.log("Added:"+ value)
-        if(value.trim()) {
+        console.log("Added:" + value)
+        if (value.trim()) {
             onSubmit(value)
             setValue('')
         } else {
             console.log('Clicked empty input')
             alert('Item name cannot be empty!')
         }
-       
+
     }
-    return(
+    return (
         <View style={styles.todoView}>
-            <TextInput 
+            <TextInput
                 style={styles.textInput}
                 onChangeText={setValue}
                 value={value}
@@ -28,8 +29,14 @@ export const AddTodo = ({ onSubmit }) => {
                 maxLength={50}
                 underlineColorAndroid={'#2c3e50'}
                 placeholderTextColor={THEME.COLOR_LIGHT_GRAY}
-                selectionColor={THEME.COLOR_NAVBAR}/>
-            <Button title="Add" onPress={pressHandler}/>
+                selectionColor={THEME.COLOR_NAVBAR} />
+            <Feather.Button
+                name="file-plus"
+                backgroundColor="#2c3e50"
+                onPress={pressHandler}>
+                Add
+            </Feather.Button>
+            {/* <Button title="Add" onPress={pressHandler}/> */}
         </View>
     )
 }
