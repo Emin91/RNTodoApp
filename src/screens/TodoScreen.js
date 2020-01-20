@@ -1,16 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { View, Text, Button } from 'react-native'
-import styles from '../styles/TodoStyle'
 import { THEME } from '../theme'
 import { AppCard } from '../components/ui/AppCard'
 import { EditModal } from '../components/EditModal'
+import { TodoContext } from '../context/todo/TodoContext'
+import { ScreenContext } from '../context/screen/screenContext'
+import styles from '../styles/TodoStyle'
 
-export const TodoScreen = ({ goBack, todo, onRemove, onSave}) => {
-
+export const TodoScreen = () => {
+    const {todos, updateTodo, removeTodo} = useContext(TodoContext)
+    const {todoId, changeScreen} = useContext(ScreenContext)
     const [modal, setModal] = useState(false)
 
+    const todo = todos.find(t => t.id === todoId)
+
     const saveHandler = title => {
-        onSave(todo.id, title)
+        updateTodo(todo.id, title)
         setModal(false)
     }
 
@@ -36,13 +41,13 @@ export const TodoScreen = ({ goBack, todo, onRemove, onSave}) => {
                         <Button
                             title="Back"
                             color={THEME.COLOR_BTN_BACK}
-                            onPress={goBack} />
+                            onPress={() => changeScreen(null)} />
                     </View>
                     <View style={styles.button}>
                         <Button
                             title="Delete"
                             color={THEME.COLOR_BTN_DELETE}
-                            onPress={()=> onRemove(todo.id)} />
+                            onPress={()=> removeTodo(todo.id)} />
                     </View>
                 </View>
             </View>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { View, TextInput, Button, } from 'react-native'
-import styles from '../styles/AddTodoStyle'
+import { View, TextInput, Keyboard, } from 'react-native'
 import { THEME } from '../theme'
 import Feather from 'react-native-vector-icons/Feather'
+import styles from '../styles/AddTodoStyle'
 
 
 export const AddTodo = ({ onSubmit }) => {
@@ -13,6 +13,7 @@ export const AddTodo = ({ onSubmit }) => {
         if (value.trim()) {
             onSubmit(value)
             setValue('')
+            Keyboard.dismiss()
         } else {
             console.log('Clicked empty input')
             alert('Item name cannot be empty!')

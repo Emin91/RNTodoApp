@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import { StyleSheet, View, Alert, TextInput, Button, Modal, Image, TouchableOpacity, Text } from 'react-native'
 import { THEME } from '../theme';
+import { StyleSheet, View, Alert, TextInput, Modal, Image, TouchableOpacity, Text } from 'react-native'
 
 export const EditModal = ({ visible, onCancel, value, onSave }) => {
 
@@ -11,6 +11,11 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
         } else {
             onSave(title)
         }
+    }
+
+    const cancelHandler = () => {
+        setTitle(value)
+        onCancel()
     }
     return (
         <Modal
@@ -39,7 +44,7 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
                 <View style={styles.btnView}>
                     <TouchableOpacity 
                         style={styles.btnCancel}
-                        onPress={onCancel}>
+                        onPress={cancelHandler}>
                         <Text style={styles.text}>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
